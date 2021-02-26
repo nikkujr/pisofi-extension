@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "PisoFi Launcher",
+  "description": "PisoFi Chrome Extension",
+  "default_locale": "en",
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "storage"
+  ],
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extName__",
+    "default_icon": {
+      "19": "icons/19.png"
+    }
+  }
+}
