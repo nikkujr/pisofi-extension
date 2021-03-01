@@ -50,11 +50,20 @@ export default {
     }
   },
   methods: {
+    isEmail(email) {
+        return /\S+@\S+\.\S+/.test(email)
+    },
     submitForm() {
-      console.log(this);
+
+      let username = this.username;
+      if (!this.isEmail(this.username)) {
+        if (this.username.length === 11) {
+          username = "+63" + this.username.substring(0);
+        }
+      }
 
       let payload = {
-        username: this.username,
+        username: username,
         password: this.password,
         region: 'ph'
       };

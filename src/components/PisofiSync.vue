@@ -29,8 +29,7 @@ import TokenRemover from './TokenRemover.vue';
 
 const instance = axios.create({
   crossDomain: true,
-  withCredentials: true,
-  baseURL: 'http://10.0.01.'
+  withCredentials: true
 });
 
 export default {
@@ -50,7 +49,7 @@ export default {
         let payload = {
             accessToken: this.accessToken
         };
-        instance.post('/api/v1/pkrycns', payload, {
+        instance.post('http://10.0.0.1/api/v1/pkrycns', payload, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
         .then(response => {
