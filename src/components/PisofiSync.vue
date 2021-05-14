@@ -44,12 +44,31 @@ export default {
   },
   methods: {
     sync() {
+
+        let url = 'http://10.0.0.1';
+        let tmpUrl = '';
+        let remote = false;
+        if (confirm("Are you configuring this remotely via ngrok?")) {
+          tmpUrl = prompt("Enter ngrok URL:\n\nExample: http://5f8711777ffb.ngrok.io", "");
+          remote = true;
+        }
+
+        if (remote) {
+          var pattern = /^(?:http:\/\/)?(.+)\.ngrok\.io$/gm
+          if (pattern.test(tmpUrl)) {
+            url = tmpUrl;
+          }
+        }
+
+        url = url.replace("http://", "");
+        url = url.replace("https://", "");
+
         this.busy = true;
         this.error = '';
         let payload = {
             accessToken: this.accessToken
         };
-        instance.post('http://10.0.0.1/api/v1/pkrycns', payload, {
+        instance.post( "http://" + encodeURIComponent(url)+'/api/v1/pkrycns', payload, {
           headers: { 'X-Requested-With': 'XMLHttpRequest' }
         })
         .then(response => {
