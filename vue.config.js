@@ -11,7 +11,13 @@ module.exports = {
       componentOptions: {
         background: {
           entry: 'src/background.js'
-        }
+        },
+        contentScripts: {
+          entries: {
+            inject: 'src/inject.js',
+            pisofi: 'src/pisofi.js',
+          },
+        },
       }
     }
   }
