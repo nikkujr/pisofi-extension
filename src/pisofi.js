@@ -6,20 +6,32 @@
             this.addEventListener("readystatechange", function() {
                 if (this.readyState === 4) {
                     if (this.responseURL.indexOf('/jwt/verify') > -1) {
-                        var div = document.createElement('div');
-                        div.style.position = 'fixed';
-                        div.style.top = 0;
-                        div.style.right = 0;
-                        div.style.background = "#FFFFE0";
-                        div.style.border = "2px solid #FFE4B5";
-                        div.style.padding = "5px 10px";
-                        div.style.zIndex = "9999999"
-                        div.style.fontSize = "3em"
 
-                        div.textContent = 'Synched to PisoFi Chrome Extension!';
-                        document.body.appendChild(div);
+                        let responseData = null;
+                        try {
+                            responseData = JSON.parse(this.responseText);
+                            if (responseData.token) {
 
-                        window.postMessage({ sender: 'pisofi_access_token', data: this.responseText},'*');
+                                var div = document.createElement('div');
+                                div.style.position = 'fixed';
+                                div.style.top = 0;
+                                div.style.right = 0;
+                                div.style.background = "#FFFFE0";
+                                div.style.border = "2px solid #FFE4B5";
+                                div.style.padding = "5px 10px";
+                                div.style.zIndex = "9999999"
+                                div.style.fontSize = "3em"
+        
+                                div.textContent = 'Synched to PisoFi Chrome Extension!';
+                                document.body.appendChild(div);
+        
+                                window.postMessage({ sender: 'pisofi_access_token', data: this.responseText},'*');
+
+                            }
+                        } catch (e) {
+                            console.log(e);
+                        }
+
 
                     }
                     if (this.responseURL.indexOf('/jwt/login') > -1) {
